@@ -18,7 +18,7 @@ pub fn set_pos(pos: Position) -> Result<(), String> {
 	}
 }
 
-pub fn set_visibility(visible: bool) -> Result<(), String> {
+pub fn set_visible(visible: bool) -> Result<(), String> {
 	unsafe {
 		todo!();
 	}

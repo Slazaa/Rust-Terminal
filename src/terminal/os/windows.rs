@@ -38,7 +38,7 @@ pub fn clear() -> Result<(), String> {
 		let h_console = GetStdHandle(STD_OUTPUT_HANDLE);
 
 		if h_console == INVALID_HANDLE_VALUE {
-			return Err("Invalid handle");
+			return Err(format!("GetStdHandle failed with error code {}", GetLastError()));
 		}
 
 		let coord_screen: COORD = std::mem::zeroed();
@@ -88,7 +88,7 @@ pub fn get_title() -> Result<String, String> {
 	unsafe {
 		let mut title = vec![0; MAX_TITLE_SIZE];
 		
-		if GetConsoleTitleW(title.as_mut_ptr(), MAX_TITLE_SIZE as u32) == FALSE {
+		if GetConsoleTitleW(title.as_mut_ptr(), MAX_TITLE_SIZE as u32) == 0 {
 			return Err(format!("GetConsoleTitleW failed with error code {}", GetLastError()));
 		}
 		

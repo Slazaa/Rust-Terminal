@@ -1,8 +1,8 @@
 mod os;
 
-use crate::utils::{CursorVisibility, Position};
+use crate::utils::Position;
 
-pub fn get_pos() -> Resul<Position, String> {
+pub fn get_pos() -> Result<Position, String> {
 	#[cfg(windows)]
 	return os::windows::get_pos();
 
@@ -26,10 +26,10 @@ pub fn set_pos(pos: Position) -> Result<(), String> {
 	return os::unix::set_pos(pos);
 }
 
-pub fn set_visibility(visible: bool) -> Result<(), String> {
+pub fn set_visible(visible: bool) -> Result<(), String> {
 	#[cfg(windows)]
-	return os::windows::set_visibility(visibility);
+	return os::windows::set_visible(visible);
 
 	#[cfg(unix)]
-	return os::unix::set_visibility(visibility);
+	return os::unix::set_visible(visible);
 }

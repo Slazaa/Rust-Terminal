@@ -8,13 +8,14 @@ use winapi::{
 		processenv::GetStdHandle,
 		winbase::STD_OUTPUT_HANDLE,
 		wincon::{
-			PCONSOLE_CURSOR_INFO,
+			CONSOLE_CURSOR_INFO,
+			CONSOLE_SCREEN_BUFFER_INFO,
 			GetConsoleCursorInfo,
+			GetConsoleScreenBufferInfo,
 			SetConsoleCursorInfo,
 			SetConsoleCursorPosition
 		},
-		wincontypes::COORD,
-		winuser::GetCursorPos
+		wincontypes::COORD
 	}
 };
 
@@ -22,30 +23,29 @@ use crate::utils::Position;
 
 pub fn get_pos() -> Result<Position, String> {
 	unsafe {
-		let mut pos = std::mem::zeroed();
-		
-		if GetCursorPos(&mut pos) == FALSE {
+		let mut csbi: CONSOLE_SCREEN_BUFFER_INFO = std::mem::zeroed();
+
+		if GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &mut csbi) == FALSE {
 			return Err(format!("GetCursorPos failed with error code {}", GetLastError()));
 		}
 		
-		Ok(Position::new(pos.x as u32, pos.y as u32))
+		Ok(Position::new(csbi.dwCursorPosition.X as u32, csbi.dwCursorPosition.Y as u32))
 	}
 }
 
 pub fn is_visible() -> Result<bool, String> {
 	unsafe {
-		let cci: PCONSOLE_CURSOR_INFO = std::mem::zeroed();
+		let mut cci: CONSOLE_CURSOR_INFO = std::mem::zeroed();
 		
-		
-		if GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), cci) == FALSE {
+		if GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &mut cci) == FALSE {
 			return Err(format!("GetConsoleCursorInfo failed with error code {}", GetLastError()));
 		}
 
-		if (*cci).bVisible == TRUE {
-			return Ok(CursorVisibility::Shown);
+		if cci.bVisible == TRUE {
+			return Ok(true);
 		}
 
-		Ok(CursorVisibility::Hidden)
+		Ok(false)
 	}
 }
 
@@ -59,16 +59,18 @@ pub fn set_pos(pos: Position) -> Result<(), String> {
 	}
 }
 
-pub fn set_visibility(visible: bool) -> Result<(), String> {
+pub fn set_visible(visible: bool) -> Result<(), String> {
 	unsafe {
-		let cci: PCONSOLE_CURSOR_INFO = std::mem::zeroed();
+		let h_console = GetStdHandle(STD_OUTPUT_HANDLE);
+		let mut cci: CONSOLE_CURSOR_INFO = std::mem::zeroed();
 
-		match visibility {
-			CursorVisibility::Shown => (*cci).bVisible = TRUE,
-			CursorVisibility::Hidden => (*cci).bVisible = FALSE
+		if GetConsoleCursorInfo(h_console, &mut cci) == FALSE {
+			return Err(format!("GetConsoleCursorInfo failed with error code {}", GetLastError()));
 		}
 
-		if SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), cci) == FALSE {
+		cci.bVisible = if visible { TRUE } else { FALSE };
+
+		if SetConsoleCursorInfo(h_console, &cci) == FALSE {
 			return Err(format!("SetConsoleCursorInfo failed with error code {}", GetLastError()));
 		}
 
