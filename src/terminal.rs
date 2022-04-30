@@ -17,6 +17,11 @@ pub fn get_title() -> String {
 	os::windows::get_title()
 }
 
+pub fn set_size(size: Size) {
+	#[cfg(windows)]
+	os::windows::set_size(size);
+}
+
 pub fn set_title(title: &str) {
 	#[cfg(windows)]
 	os::windows::set_title(title);

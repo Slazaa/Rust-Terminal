@@ -1,4 +1,5 @@
 use winapi::{
+	shared::minwindef::TRUE,
 	um::{
 		processenv::GetStdHandle,
 		winbase::STD_OUTPUT_HANDLE,
@@ -8,10 +9,14 @@ use winapi::{
 			FillConsoleOutputCharacterA,
 			GetConsoleScreenBufferInfo,
 			GetConsoleTitleW,
-			SetConsoleCursorPosition, 
-			SetConsoleTitleW
+			SetConsoleCursorPosition,
+			SetConsoleTitleW,
+			SetConsoleWindowInfo
 		},
-		wincontypes::COORD
+		wincontypes::{
+			COORD,
+			SMALL_RECT
+		}
 	}
 };
 
@@ -56,6 +61,13 @@ pub fn get_title() -> String {
 		let mut title = vec![0; MAX_TITLE_SIZE];
 		GetConsoleTitleW(title.as_mut_ptr(), MAX_TITLE_SIZE as u32);
 		return String::from_utf16(&title).unwrap();
+	}
+}
+
+pub fn set_size(size: Size) {
+	unsafe {
+		let rect = SMALL_RECT { Left: 0, Top: 0, Right: (*size.width() - 1) as i16, Bottom: (*size.height() - 1) as i16 };
+		SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &rect);
 	}
 }
 
