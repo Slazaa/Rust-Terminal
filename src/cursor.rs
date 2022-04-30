@@ -26,7 +26,7 @@ pub fn set_pos(pos: Position) -> Result<(), String> {
 	return os::unix::set_pos(pos);
 }
 
-pub fn set_visibility(visible: true) -> Result<(), String> {
+pub fn set_visibility(visible: bool) -> Result<(), String> {
 	#[cfg(windows)]
 	return os::windows::set_visibility(visibility);
 
