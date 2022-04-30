@@ -66,7 +66,7 @@ pub fn get_title() -> String {
 
 pub fn set_size(size: Size) {
 	unsafe {
-		let rect = SMALL_RECT { Left: 0, Top: 0, Right: (*size.width() - 1) as i16, Bottom: (*size.height() - 1) as i16 };
+		let rect = SMALL_RECT { Left: 0, Top: 0, Right: (size.width - 1) as i16, Bottom: (size.height - 1) as i16 };
 		SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &rect);
 	}
 }
