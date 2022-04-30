@@ -8,7 +8,6 @@ A Rust cross-platform terminal manager
 	- Size
 	- Title
 - Cursor
-	- Blinking
 	- Position
 	- Visibility
 - Style

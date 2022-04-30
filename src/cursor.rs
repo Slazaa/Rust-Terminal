@@ -2,22 +2,34 @@ mod os;
 
 use crate::utils::{CursorVisibility, Position};
 
-pub fn get_position() -> Position {
+pub fn get_pos() -> Resul<Position, String> {
 	#[cfg(windows)]
-	os::windows::get_position()
+	return os::windows::get_pos();
+
+	#[cfg(unix)]
+	return os::unix::get_pos();
 }
 
-pub fn set_blinking(state: bool) {
+pub fn is_visible() -> Result<bool, String> {
 	#[cfg(windows)]
-	os::windows::set_blinking(state);
+	return os::windows::is_visible();
+
+	#[cfg(unix)]
+	return os::unix::is_visible();
 }
 
-pub fn set_position(position: Position) {
+pub fn set_pos(pos: Position) -> Result<(), String> {
 	#[cfg(windows)]
-	os::windows::set_position(position);
+	return os::windows::set_pos(pos);
+
+	#[cfg(unix)]
+	return os::unix::set_pos(pos);
 }
 
-pub fn set_visibility(visibility: CursorVisibility) {
+pub fn set_visibility(visible: true) -> Result<(), String> {
 	#[cfg(windows)]
-	os::windows::set_visibility(visibility);
+	return os::windows::set_visibility(visibility);
+
+	#[cfg(unix)]
+	return os::unix::set_visibility(visibility);
 }

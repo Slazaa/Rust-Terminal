@@ -1,8 +1,3 @@
-pub enum CursorVisibility {
-	Shown,
-	Hidden
-}
-
 #[derive(Debug)]
 pub struct Position {
 	pub x: u32,
