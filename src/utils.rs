@@ -1,4 +1,24 @@
 #[derive(Debug)]
+pub enum Color {
+	Black,
+	Blue,
+	Cyan,
+	DarkBlue,
+	DarkCyan,
+	DarkGreen,
+	DarkMagenta,
+	DarkRed,
+	DarkYellow,
+	DarkGray,
+	Gray,
+	Green,
+	Magenta,
+	Red,
+	Yellow,
+	White
+}
+
+#[derive(Debug)]
 pub struct Position {
 	pub x: u32,
 	pub y: u32
