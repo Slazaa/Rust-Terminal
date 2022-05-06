@@ -11,6 +11,5 @@ A Rust cross-platform terminal manager
 	- Position
 	- Visibility
 - Style
-	- Color
-		- Foreground
-		- Background
+	- Foreground color
+	- Background color
