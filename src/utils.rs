@@ -6,16 +6,16 @@ pub enum Color {
 	DarkBlue,
 	DarkCyan,
 	DarkGreen,
+	DarkGrey,
 	DarkMagenta,
 	DarkRed,
 	DarkYellow,
-	DarkGray,
-	Gray,
 	Green,
+	Grey,
 	Magenta,
 	Red,
-	Yellow,
-	White
+	White,
+	Yellow
 }
 
 #[derive(Debug)]
@@ -46,4 +46,8 @@ impl Size {
 			height
 		}
 	}
+}
+
+pub fn to_wstring(string: &str) -> Vec<u16> {
+	string.encode_utf16().chain(Some(0)).collect()
 }

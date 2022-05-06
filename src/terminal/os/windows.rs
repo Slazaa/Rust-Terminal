@@ -25,13 +25,9 @@ use winapi::{
 	}
 };
 
-use crate::utils::Size;
+use crate::utils::{Size, to_wstring};
 
 const MAX_TITLE_SIZE: usize = 100;
-
-fn wide_null(string: &str) -> Vec<u16> {
-	string.encode_utf16().chain(Some(0)).collect()
-}
 
 pub fn clear() -> Result<(), String> {
 	unsafe {
@@ -113,7 +109,7 @@ pub fn set_size(size: Size) -> Result<(), String> {
 
 pub fn set_title(title: &str) -> Result<(), String> {
 	unsafe {
-		if SetConsoleTitleW(wide_null(title).as_ptr()) == FALSE {
+		if SetConsoleTitleW(to_wstring(title).as_ptr()) == FALSE {
 			return Err(format!("SetConsoleTitleW failed with error code {}", GetLastError()));
 		}
 
