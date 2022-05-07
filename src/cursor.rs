@@ -2,7 +2,7 @@ mod os;
 
 use crate::utils::Position;
 
-pub fn get_pos() -> Result<Position, String> {
+pub fn get_pos() -> Position {
 	#[cfg(unix)]
 	return os::unix::get_pos();
 
@@ -10,7 +10,7 @@ pub fn get_pos() -> Result<Position, String> {
 	return os::windows::get_pos();
 }
 
-pub fn is_visible() -> Result<bool, String> {
+pub fn is_visible() -> bool {
 	#[cfg(unix)]
 	return os::unix::is_visible();
 
@@ -18,7 +18,7 @@ pub fn is_visible() -> Result<bool, String> {
 	return os::windows::is_visible();
 }
 
-pub fn set_pos(pos: Position) -> Result<(), String> {
+pub fn set_pos(pos: Position) {
 	#[cfg(unix)]
 	return os::unix::set_pos(pos);
 
@@ -26,7 +26,7 @@ pub fn set_pos(pos: Position) -> Result<(), String> {
 	return os::windows::set_pos(pos);
 }
 
-pub fn set_visible(visible: bool) -> Result<(), String> {
+pub fn set_visible(visible: bool) {
 	#[cfg(unix)]
 	return os::unix::set_visible(visible);
 	
