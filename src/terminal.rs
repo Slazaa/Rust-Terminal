@@ -2,7 +2,7 @@ mod os;
 
 use crate::utils::Size;
 
-pub fn clear() -> Result<(), String> {
+pub fn clear() {
 	#[cfg(unix)]
 	return os::unix::clear();
 
@@ -10,7 +10,7 @@ pub fn clear() -> Result<(), String> {
 	return os::windows::clear();
 }
 
-pub fn get_size() -> Result<Size, String> {
+pub fn get_size() -> Size {
 	#[cfg(unix)]
 	return os::unix::get_size();
 
@@ -18,7 +18,7 @@ pub fn get_size() -> Result<Size, String> {
 	return os::windows::get_size();
 }
 
-pub fn get_title() -> Result<String, String> {
+pub fn get_title() -> String {
 	#[cfg(unix)]
 	return os::unix::get_title();
 
@@ -26,7 +26,7 @@ pub fn get_title() -> Result<String, String> {
 	return os::windows::get_title();
 }
 
-pub fn set_size(size: Size) -> Result<(), String> {
+pub fn set_size(size: Size) {
 	#[cfg(unix)]
 	return os::unix::set_size(size);
 
@@ -34,7 +34,7 @@ pub fn set_size(size: Size) -> Result<(), String> {
 	return os::windows::set_size(size);
 }
 
-pub fn set_title(title: &str) -> Result<(), String> {
+pub fn set_title(title: &str) {
 	#[cfg(unix)]
 	return os::unix::set_title(title);
 	

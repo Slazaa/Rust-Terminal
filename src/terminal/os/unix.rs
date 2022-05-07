@@ -1,30 +1,30 @@
 use crate::utils::Size;
 
-pub fn clear() -> Result<(), String> {
+pub fn clear() {
 	unsafe {
 		todo!();
 	}
 }
 
-pub fn get_size() -> Result<Size, String> {
+pub fn get_size() -> Size {
 	unsafe {
 		todo!();
 	}
 }
 
-pub fn get_title() -> Result<Size, String> {
+pub fn get_title() -> Size {
 	unsafe {
 		todo!();
 	}
 }
 
-pub fn set_size(size: Size) -> Result<(), String> {
+pub fn set_size(size: Size) {
 	unsafe {
 		todo!();
 	}
 }
 
-pub fn set_title(title: &str) -> Result<(), String> {
+pub fn set_title(title: &str) {
 	unsafe {
 		todo!();
 	}
