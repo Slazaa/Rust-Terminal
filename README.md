@@ -20,7 +20,7 @@ A Rust cross-platform terminal manager
 ## Examples
 Terminal:
 ```rs
-use terminal_manager::terminal;
+use terminal::terminal;
 
 fn main() {
 	terminal::clear();
@@ -33,7 +33,7 @@ fn main() {
 
 Cursor:
 ```rs
-use terminal_manager::cursor;
+use terminal::cursor;
 
 fn main() {
 	cursor::get_pos();
@@ -45,7 +45,7 @@ fn main() {
 
 Style:
 ```rs
-use terminal_manager::style{self, Color};
+use terminal::style{self, Color};
 
 fn main() {
 	style::get_background_color();
