@@ -1,4 +1,4 @@
-# Rust - Terminal Manager
+# Rust - Terminal
 A Rust cross-platform terminal manager
 
 ## Implemented OS
