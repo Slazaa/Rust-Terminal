@@ -1,31 +1,31 @@
 use crate::utils::Size;
 
 pub fn clear() {
-	unsafe {
+	//unsafe {
 		todo!();
-	}
+	//}
 }
 
 pub fn get_size() -> Size {
-	unsafe {
+	//unsafe {
 		todo!();
-	}
+	//}
 }
 
 pub fn get_title() -> Size {
-	unsafe {
+	//unsafe {
 		todo!();
-	}
+	//}
 }
 
-pub fn set_size(size: Size) {
-	unsafe {
+pub fn set_size(_size: Size) {
+	//unsafe {
 		todo!();
-	}
+	//}
 }
 
-pub fn set_title(title: &str) {
-	unsafe {
+pub fn set_title(_title: &str) {
+	//unsafe {
 		todo!();
-	}
+	//}
 }

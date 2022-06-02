@@ -1,25 +1,25 @@
 use crate::utils::Position;
 
 pub fn get_pos() -> Result<Position, String> {
-	unsafe {
+	//unsafe {
 		todo!();
-	}
+	//}
 }
 
 pub fn is_visible() -> Result<bool, String> {
-	unsafe {
+	//unsafe {
 		todo!();
-	}
+	//}
 }
 
-pub fn set_pos(pos: Position) -> Result<(), String> {
-	unsafe {
+pub fn set_pos(_pos: Position) -> Result<(), String> {
+	//unsafe {
 		todo!();
-	}
+	//}
 }
 
-pub fn set_visible(visible: bool) -> Result<(), String> {
-	unsafe {
+pub fn set_visible(_visible: bool) -> Result<(), String> {
+	//unsafe {
 		todo!();
-	}
+	//}
 }

@@ -4,7 +4,6 @@ use winapi::{
 		TRUE
 	},
 	um::{
-		errhandlingapi::GetLastError,
 		processenv::GetStdHandle,
 		winbase::STD_OUTPUT_HANDLE,
 		wincon::{
