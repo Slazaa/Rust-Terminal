@@ -16,6 +16,8 @@ A Rust cross-platform terminal manager
 - Style
 	- Foreground color
 	- Background color
+- Event
+	- Read event
 
 ## Examples
 Terminal:
@@ -52,6 +54,28 @@ fn main() {
 	style::get_foreground_color();
 	style::set_background_color(Color::Red);
 	style::set_foreground_color(Color::Blue);
+}
+```
+
+Event:
+```rs
+use terminal::event::{self, Event};
+
+fn main() {
+    loop {
+        match event::read().unwrap() {
+            Event::Key { key, down } => {
+                if down {
+                    println!("{} is pressed", key);
+
+                    if key == 'a' {
+                        break;
+                    }
+                }
+            }
+            _ => ()
+        }
+    }
 }
 ```
 
